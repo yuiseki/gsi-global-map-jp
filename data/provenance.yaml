@@ -1,0 +1,144 @@
+# Where this data comes from and what was done to it.
+
+source:
+  name: Global Map Japan (地球地図日本)
+  publisher: Geospatial Information Authority of Japan (GSI, 国土地理院)
+  page: https://www.gsi.go.jp/kankyochiri/gm_jpn.html
+  files: https://www1.gsi.go.jp/geowww/globalmap-gsi/download/data/gm-japan/
+  specifications: https://github.com/globalmaps/specifications
+  technical_reports: [D1-No.576 (vector, second edition), D1-No.459 (raster 1.0), D1-No.464 (raster 1.1)]
+  licence:
+    applied: GSI Content Terms of Use, applying PDL1.0 (as amended 2025-11-20, read 2026-10-03)
+    terms: https://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html
+    card_licence_id: cc-by-4.0 (PDL1.0 is compatible with CC BY 4.0)
+    attribution_required: true
+    attribution_example: "出典：国土地理院ウェブサイト（https://www.gsi.go.jp/kankyochiri/gm_jpn.html）; Global Map Japan, © Geospatial Information Authority of Japan"
+    edits_must_be_stated: true
+    commercial_use: allowed
+    outdated_terms_in_files: |
+      The .met metadata of 2.1 and 2.2 (otherConstraints) and the Read_me.txt
+      of gm-jpn-trans_u_2_1.zip say an application is required except for
+      non-commercial use in small quantity. The current page, FAQ and terms
+      require no application. The files are kept unchanged inside GSI's zips.
+
+versions:
+  note: |
+    Directories are named after the map version. Files fetched 2026-10-04
+    (UTC). gm-jpn-all_u_2_2.zip was replaced by GSI in July 2023
+    (polbnda_jpn.* only; five rows of attributes corrected, geometry
+    unchanged); gm-jpn-trans_u_2_2.zip in May 2017 (roadl_jpn.*, its .prj now
+    JGD2000). The 2.1 zips were not corrected. Earlier copies are not
+    available. The theme zips of each vector version hold byte-identical
+    copies of the all-layers zip's layer files; the Parquet is made from the
+    all-layers zip. Rasters are published as zips only.
+  vector-2.2:
+    published: "2016"
+    zips:
+      - {file: gm-jpn-all_u_2_2.zip, bytes: 9688166, sha256: e2bc60643e69828b60c08842b13cff197d40d906727ff619eba16bcf9ed63c52, last_modified: "Wed, 19 Jul 2023 00:47:09 GMT", fetched_at: "2026-10-04T19:27:54Z"}
+      - {file: gm-jpn-trans_u_2_2.zip, bytes: 4848845, sha256: bb79a46629eb1dca8677821ede9653dbd72d79401c8641f9159bdcf8f81cc306, last_modified: "Mon, 01 May 2017 06:30:25 GMT", fetched_at: "2026-10-04T19:28:03Z"}
+    parquet_from: gm-jpn-all_u_2_2.zip
+    layers:
+      airp: {rows: 92, crs: "EPSG:4612"}
+      builtupa: {rows: 221, crs: "EPSG:8994"}
+      builtupp: {rows: 1640, crs: "EPSG:8994"}
+      coastl: {rows: 1204, crs: "EPSG:8994"}
+      ferryl: {rows: 556, crs: "EPSG:8994"}
+      inwatera: {rows: 825, crs: "EPSG:8994"}
+      miscl: {rows: 29, crs: "EPSG:8994"}
+      miscp: {rows: 271, crs: "EPSG:8994"}
+      polbnda: {rows: 2914, crs: "EPSG:8994"}
+      polbndl: {rows: 4866, crs: "EPSG:8994"}
+      portp: {rows: 128, crs: "EPSG:8994"}
+      raill: {rows: 3420, crs: "EPSG:8994", null_geometry: 1}
+      riverl: {rows: 4795, crs: "EPSG:8994"}
+      roadl: {rows: 31642, crs: "EPSG:4612", null_geometry: 1}
+      rstatp: {rows: 108, crs: "EPSG:8994"}
+  vector-2.1:
+    published: "2015"
+    zips:
+      - {file: gm-jpn-all_u_2_1.zip, bytes: 8471554, sha256: c8f9d7e822f4644071474bf9724638610f1288a5e910d09788c76568dd3f0377, last_modified: "Wed, 04 Nov 2015 00:14:19 GMT", fetched_at: "2026-10-04T19:28:07Z"}
+      - {file: gm-jpn-bnd_u_2_1.zip, bytes: 3350961, sha256: 826a2b54630f2d15376bc1831aafe77f72f107e1c39ef0034bb41b184330faaa, last_modified: "Wed, 04 Nov 2015 00:14:46 GMT", fetched_at: "2026-10-04T19:28:10Z"}
+      - {file: gm-jpn-trans_u_2_1.zip, bytes: 4319472, sha256: a4df0cb0dd703c0be0cd7fe20ca21868f2f52d9b93620efd157b8376c94828d8, last_modified: "Fri, 31 Jul 2015 05:17:51 GMT", fetched_at: "2026-10-04T19:28:14Z"}
+    parquet_from: gm-jpn-all_u_2_1.zip
+    layers:
+      airp: {rows: 92, crs: "EPSG:4612"}
+      builtupa: {rows: 221, crs: "EPSG:8994"}
+      builtupp: {rows: 1640, crs: "EPSG:8994"}
+      coastl: {rows: 1204, crs: "EPSG:8994"}
+      ferryl: {rows: 556, crs: "EPSG:8994"}
+      inwatera: {rows: 825, crs: "EPSG:8994"}
+      miscl: {rows: 29, crs: "EPSG:8994"}
+      miscp: {rows: 271, crs: "EPSG:8994"}
+      polbnda: {rows: 2914, crs: "EPSG:8994"}
+      polbndl: {rows: 4866, crs: "EPSG:8994"}
+      portp: {rows: 128, crs: "EPSG:8994"}
+      raill: {rows: 3377, crs: "EPSG:8994"}
+      riverl: {rows: 4795, crs: "EPSG:8994"}
+      roadl: {rows: 31451, crs: "EPSG:8994"}
+      rstatp: {rows: 89, crs: "EPSG:8994"}
+  vector-2.0:
+    published: "2011"
+    zips:
+      - {file: gm-jpn-all_u_2.zip, bytes: 8922182, sha256: 901bbc28911a798f6b53a14f4d3ddd58df02d693198091f8ccc573d33d75361e, last_modified: "Wed, 12 Nov 2014 06:40:20 GMT", fetched_at: "2026-10-04T19:28:17Z"}
+      - {file: gm-jpn-bnd_u_2.zip, bytes: 3530869, sha256: 0490a131299d0a8f79fbfe28b5ffb03177dca1f0ec7e0ed03fa0d1109b73d158, last_modified: "Wed, 12 Nov 2014 06:40:21 GMT", fetched_at: "2026-10-04T19:28:18Z"}
+      - {file: gm-jpn-hydro_u_2.zip, bytes: 1128363, sha256: 82ef18af0ab0abc3be7ccc7c29e53d061af49ecc4697e965a4657bb528a5d4f0, last_modified: "Wed, 12 Nov 2014 06:40:20 GMT", fetched_at: "2026-10-04T19:28:20Z"}
+      - {file: gm-jpn-pop_u_2.zip, bytes: 89483, sha256: dc6f57e9a7a03588c92dad143582a392f9df388e293e618ee4604edc6c8c0bce, last_modified: "Wed, 12 Nov 2014 06:40:20 GMT", fetched_at: "2026-10-04T19:28:26Z"}
+      - {file: gm-jpn-trans_u_2.zip, bytes: 4175729, sha256: a328f46fda276439f836f68e718404ba88e5b2736885a25040b8f2727e3e0ffe, last_modified: "Wed, 12 Nov 2014 06:40:20 GMT", fetched_at: "2026-10-04T19:28:28Z"}
+    parquet_from: gm-jpn-all_u_2.zip
+    layers:
+      airp: {rows: 93, crs: "EPSG:8994"}
+      builtupa: {rows: 221, crs: "EPSG:8994"}
+      builtupp: {rows: 1640, crs: "EPSG:8994"}
+      coastl: {rows: 1201, crs: "EPSG:8994"}
+      ferryl: {rows: 556, crs: "EPSG:8994"}
+      inwatera: {rows: 825, crs: "EPSG:8994"}
+      miscl: {rows: 29, crs: "EPSG:8994"}
+      miscp: {rows: 271, crs: "EPSG:8994"}
+      polbnda: {rows: 2924, crs: "EPSG:8994"}
+      polbndl: {rows: 4877, crs: "EPSG:8994"}
+      portp: {rows: 128, crs: "EPSG:8994"}
+      raill: {rows: 3377, crs: "EPSG:8994"}
+      riverl: {rows: 4795, crs: "EPSG:8994"}
+      roadl: {rows: 31460, crs: "EPSG:8994"}
+      rstatp: {rows: 89, crs: "EPSG:8994"}
+  raster-1.1:
+    published: "2006"
+    zips:
+      - {file: gm-jpn-el_u_1_1.zip, bytes: 485452, sha256: efd540dc25ad96644358b50e7698b02bd4101099d7922efc9ae77af0d64e36db, last_modified: "Wed, 12 Nov 2014 06:40:17 GMT", fetched_at: "2026-10-04T19:28:29Z"}
+      - {file: gm-jpn-lc_u_1_1.zip, bytes: 192967, sha256: feae73d4b825c7ec10c5d10a9c1681f4912eb30bf2519b80572d6bb7a18f10ba, last_modified: "Wed, 12 Nov 2014 06:40:16 GMT", fetched_at: "2026-10-04T19:28:31Z"}
+      - {file: gm-jpn-lu_u_1_1.zip, bytes: 158567, sha256: 96f9f770fd9681d47feec12ee83aba5d3533ba5ff0f9ac329564c46439e088b1, last_modified: "Wed, 12 Nov 2014 06:40:15 GMT", fetched_at: "2026-10-04T19:28:32Z"}
+      - {file: gm-jpn-ve_u_1_1.zip, bytes: 242107, sha256: 0c413405d721912711bdd19a001caade53f52acdc675f024f698693025717eba, last_modified: "Wed, 12 Nov 2014 06:40:15 GMT", fetched_at: "2026-10-04T19:28:33Z"}
+  raster-1.0:
+    published: "2000"
+    zips:
+      - {file: gm-jpn-el_u_1_0.zip, bytes: 461988, sha256: 4d3ea5c414632546bd252bf5169d1249e2ceb8a8172e91aeed6e147a8fbec992, last_modified: "Wed, 12 Nov 2014 06:40:17 GMT", fetched_at: "2026-10-04T19:28:38Z"}
+      - {file: gm-jpn-lc_u_1_0.zip, bytes: 194604, sha256: e3804fa63749470a5f63b598ad399686570ae3b0b041c1d32f1402605d109ab1, last_modified: "Wed, 12 Nov 2014 06:40:16 GMT", fetched_at: "2026-10-04T19:28:39Z"}
+      - {file: gm-jpn-lu_u_1_0.zip, bytes: 107315, sha256: 3b6acbbccc53aa9d501a9231f53734b55686bd6d0aa188a09cba004f71bdbdf3, last_modified: "Wed, 12 Nov 2014 06:40:16 GMT", fetched_at: "2026-10-04T19:28:41Z"}
+      - {file: gm-jpn-ve_u_1_0.zip, bytes: 191396, sha256: 01f90e5079edbfd44a08512d965445a3255b52234f61bdec2df4945e828e25c3, last_modified: "Wed, 12 Nov 2014 06:40:15 GMT", fetched_at: "2026-10-04T19:28:42Z"}
+
+checked:
+  note: scripts/02_verify.py, with DuckDB and readers of its own for DBF, SHP and WKB, before upload
+  items:
+    - zips against MANIFEST.json (bytes, sha256) and zipfile.testzip
+    - theme zips hold byte-identical (CRC) copies of the all-layers zip's layer files
+    - rows equal the DBF header and the .shp record count, and the pinned counts
+    - every attribute value equals the DBF text (trimmed, integers parsed), 1,176,455 values
+    - every geometry has its .shp record's x and y in order, 2,999,080 points; empty shapes are NULL
+    - the dropped M values were only 0 or the Shapefile no-data value
+    - every column of the type its name gives
+    - GeoParquet 1.0.0 metadata states the CRS the .prj names
+    - a DuckDB without the spatial extension opens every file
+    - no bloom filters
+    - polbnda 2.2 differs from 2.1 in exactly 5 rows (fid 52, 53, 54, 403, 2110), geometry identical
+
+modifications:
+  raw: none. GSI's zips, byte for byte.
+  parquet:
+    - one GeoParquet 1.0.0 per vector layer and version, read with GDAL (DuckDB spatial ST_Read)
+    - columns typed by name (pop, ypc and the Global Map codes INTEGER, the rest text); a value that does not fit stops the build
+    - text trimmed of surrounding spaces as GDAL reads it (one value loses a leading space, polbnda laa " Ogasawara Mura")
+    - fid added, the record's position in the Shapefile from 0; rows in that order
+    - M values dropped (only 0 or no-data); x and y unchanged
+    - no reprojection; CRS as the .prj names it
+    - written with zstd, without bloom filters
+  rasters: not converted

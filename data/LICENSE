@@ -1,0 +1,53 @@
+GSI Content Terms of Use (国土地理院コンテンツ利用規約), applying the
+Public Data License version 1.0 (公共データ利用規約 第1.0版, PDL1.0),
+which is compatible with Creative Commons Attribution 4.0 International
+(CC BY 4.0).
+https://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html
+
+Everything under this directory comes from Global Map Japan (地球地図日本),
+made and published by the Geospatial Information Authority of Japan (GSI,
+国土地理院) at https://www.gsi.go.jp/kankyochiri/gm_jpn.html. That page says
+the GSI Content Terms of Use apply to the data. The terms, as amended on
+20 November 2025 and read on 2026-10-03, apply PDL1.0 to GSI's content,
+require the source to be credited (for example
+"出典：国土地理院ウェブサイト（https://www.gsi.go.jp/kankyochiri/gm_jpn.html）"),
+require edited or processed content to say so separately from the credit,
+and forbid presenting edited content as if GSI had made it. GSI's Global Map
+FAQ (https://www.gsi.go.jp/kankyochiri/gm_faq.html) asks for the credit
+whether the use is commercial or not, and gives "Global Map Japan" and
+"© Geospatial Information Authority of Japan" as its example.
+
+Source: 出典：国土地理院ウェブサイト（https://www.gsi.go.jp/kankyochiri/gm_jpn.html）
+Global Map Japan, © Geospatial Information Authority of Japan
+
+The .met metadata files inside the zips of versions 2.1 and 2.2, and the
+Read_me.txt of the 2.1 transportation zip, still state an older condition
+("Application procedure is required in using the product, except for
+non-commercial purpose and use in small quantity. ..."). That condition is
+outdated; the current terms are those above. The files are left in GSI's
+zips unchanged.
+
+The files under raw/<version>/ are GSI's own zips, byte for byte; each
+version's MANIFEST.json records their URLs, sizes, sha256 and Last-Modified.
+
+The Parquet under parquet/<version>/<layer>.parquet was made by
+yuiseki/gsi-global-map-jp from the Shapefiles in the all-layers zip of each
+vector version (2.0, 2.1, 2.2). This is an edited form of GSI's data, not a
+GSI product, and GSI has not reviewed it:
+
+  - each Shapefile became one GeoParquet 1.0.0 file, read with GDAL through
+    DuckDB's spatial extension
+  - columns were typed by name (the Global Map attribute codes and pop and
+    ypc as integers); every other column is the text of the DBF, trimmed of
+    surrounding spaces as GDAL reads it (one value, laa " Ogasawara Mura" in
+    polbnda, loses a leading space)
+  - a column fid was added: the record's position in the Shapefile, from 0
+  - the M values of the PolyLineM layers (only 0 or the Shapefile no-data
+    value) were dropped; x and y are unchanged
+  - coordinates were not reprojected; each file states the CRS its .prj
+    names (ITRF94, EPSG:8994, or JGD2000, EPSG:4612)
+  - no other value was changed; the rasters were not converted
+
+The code that fetches, checks and converts is in the repository this
+dataset was built from (https://github.com/yuiseki/gsi-global-map-jp); its
+licence does not apply here.

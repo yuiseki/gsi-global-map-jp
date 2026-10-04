@@ -54,3 +54,46 @@ def test_a_broken_zip_fails(tmp_path):
     (tmp_path / "a.zip").write_bytes(b"PK not really")
     _write_manifest(tmp_path, "a.zip")
     assert not all(ok for ok, _ in _run(tmp_path))
+
+
+def _shapefile(tmp_path, geom_sql):
+    import duckdb
+
+    con = duckdb.connect()
+    con.execute("install spatial; load spatial")
+    shp = tmp_path / "t_jpn.shp"
+    con.execute(
+        f"copy (select 'Sapporo Shi' as laa, 1880863 as pop, {geom_sql} as geom) to '{shp}' "
+        "(format gdal, driver 'ESRI Shapefile', srs 'EPSG:4612')"
+    )
+    return shp
+
+
+def test_the_dbf_reader_gives_the_raw_text(tmp_path):
+    shp = _shapefile(tmp_path, "st_point(141.35, 43.06)")
+    fields, rows, _ = m.read_dbf(shp.with_suffix(".dbf").read_bytes())
+    assert [f for f, _ in fields] == ["laa", "pop"]
+    assert [t for _, t in fields] == ["C", "N"]
+    assert [m.raw_value(v, t) for v, (_, t) in zip(rows[0], fields, strict=True)] == [
+        "Sapporo Shi",
+        1880863,
+    ]
+
+
+def test_raw_value_trims_as_gdal_does():
+    assert m.raw_value(" Ogasawara Mura   ", "C") == "Ogasawara Mura"
+    assert m.raw_value("   -99999999", "N") == -99999999
+    assert m.raw_value("     ", "N") is None
+
+
+def test_the_shp_reader_and_the_wkb_reader_agree(tmp_path):
+    import duckdb
+
+    shp = _shapefile(tmp_path, "st_geomfromtext('POLYGON ((140 36, 141 36, 141 37, 140 36))')")
+    (xy, ms), = m.read_shp(shp.read_bytes())
+    assert ms == []
+    con = duckdb.connect()
+    con.execute("load spatial")
+    wkb = con.sql(f"select st_aswkb(geom) from st_read('{shp}')").fetchone()[0]
+    assert m.wkb_xy(bytes(wkb)) == xy
+    assert len(xy) == 4 and set(xy) == {(140.0, 36.0), (141.0, 36.0), (141.0, 37.0)}
